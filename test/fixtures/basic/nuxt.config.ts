@@ -1,4 +1,3 @@
-import { defineNuxtConfig } from 'nuxt'
 import { resolve } from 'pathe'
 import contentModule from '../../..'
 
@@ -13,20 +12,34 @@ export default defineNuxtConfig({
       {
         path: resolve(__dirname, './components'),
         global: true
+      },
+      {
+        path: resolve(__dirname, './content'),
+        global: true,
+        pathPrefix: false,
+        prefix: ''
       }
     ]
   },
   modules: [contentModule],
   content: {
-    locales: ['en', 'fa'],
+    locales: ['fa', 'en'],
+    defaultLocale: 'en',
     sources: [
       {
         name: 'fa-ir',
         prefix: '/fa',
         driver: 'fs',
         base: resolve(__dirname, 'content-fa')
+      },
+      {
+        name: '_tests',
+        prefix: '/_tests',
+        driver: 'fs',
+        base: resolve(__dirname, 'content-tests')
       }
     ],
+    ignores: ['.*\\.vue'],
     navigation: {
       fields: ['icon']
     },
